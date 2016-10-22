@@ -1,0 +1,52 @@
+<h1>{{title}}</h1>
+
+<div *ngIf="selectedPerson" class="row">
+    
+    <div class="form-group col-md-3">
+        <label>ID</label>
+        <input type="text" [(ngModel)]="selectedPerson.BusinessEntityID" placeholder="ID" class="form-control">
+    </div>
+    <div class="form-group col-md-3">
+        <label>Nombre</label>
+        <input type="text" [(ngModel)]="selectedPerson.FirstName" placeholder="Nombre" class="form-control">
+    </div>
+    <div class="form-group col-md-3">
+        <label>Apellido Paterno</label>
+        <input type="text" [(ngModel)]="selectedPerson.MiddleName" placeholder="Apellido Paterno" class="form-control">
+    </div>
+    <div class="form-group col-md-3">
+        <label>Apellido Materno</label>
+        <input type="text" [(ngModel)]="selectedPerson.LastName" placeholder="Apellido Materno" class="form-control">
+    </div>
+</div>
+
+<div class="row">
+
+    <button (click)="onNewPerson()" class="btn btn-primary col-md-1">New</button>
+    <button (click)="addPerson(selectedPerson)" class="btn btn-default col-md-1">Add</button>
+    <div class="form-group col-md-3 col-md-offset-7">
+        <label>Search</label>
+        <input type="text" [(ngModel)]="search" (ngModelChange)="searchPersona()" class="form-control" placeholder="search"/>
+    </div>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Apellido Paterno</th>
+      <th>Apellido Materno</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let persona of personas" (click)="onSelectPerson(persona)" [class.selected]="persona === selectedPerson">
+      <td>{{persona.BusinessEntityID}}</td>
+      <td>{{persona.FirstName}}</td>
+      <td>{{persona.MiddleName}}</td>
+      <td>{{persona.LastName}}</td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-default" (click)="previousPage()">Previous</button>
+<button class="btn btn-default" (click)="nextPage()">Next</button>
